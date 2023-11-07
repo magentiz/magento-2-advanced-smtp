@@ -105,6 +105,10 @@ class SesService extends AbstractMailService
         return $SesClient->sendEmail($this->filterParameters($parameters))->toArray();
     }
 
+    /**
+     * @param $message
+     * @return \Aws\Result
+     */
     public function sendRaw($message)
     {
         $SesClient = SesClient::factory(array(
@@ -169,6 +173,10 @@ class SesService extends AbstractMailService
         return $SesClient->sendRawEmail($myArraySES);
     }
 
+    /**
+     * @param $message
+     * @return bool|mixed
+     */
     protected function extractFrom($message) {
 
         $from = $message->getFrom();

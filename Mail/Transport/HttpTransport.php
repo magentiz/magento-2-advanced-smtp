@@ -26,6 +26,9 @@ class HttpTransport implements TransportInterface
         $this->service->send($message);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function hasAttachment($message){
         $body = $message->getBody();
         if (!method_exists($body, 'getParts')) {

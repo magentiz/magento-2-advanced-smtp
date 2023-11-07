@@ -47,6 +47,10 @@ abstract class AbstractMailService implements MailServiceInterface
         return null;
     }
 
+    /**
+     * @param $message
+     * @return string|null
+     */
     protected function extractHtml($message): ?string
     {
         $body = $message->getBody();
