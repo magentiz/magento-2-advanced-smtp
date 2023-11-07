@@ -6,6 +6,7 @@ use Magentiz\AWSSes\Model\Config\Configuration;
 use Magentiz\AWSSes\Service\AbstractMailService;
 use Aws\Ses\Exception\SesException;
 use Aws\Ses\SesClient;
+use Laminas\Mail\AddressList;
 use Laminas\Mail\Message;
 use Laminas\Mail\Exception\RuntimeException;
 use Laminas\Mail\Exception\OutOfBoundsException;
@@ -19,6 +20,8 @@ class SesService extends AbstractMailService
      * SES supports a maximum of 50 recipients per messages
      */
     public const RECIPIENT_LIMIT = 500;
+
+    protected $configuration;
 
     public function __construct(Configuration $configuration)
     {
@@ -41,12 +44,13 @@ class SesService extends AbstractMailService
             'version' => 'latest'
         ));
 
-        $from = $message->getFrom();
-        $from_name = base64_encode($from[0]->getName());
+        $from = $this->extractFrom($message);
+
+        $from_name = base64_encode($from->getName());
         $from_en = "=?utf-8?B?$from_name?=";
 
         $parameters = [
-            'Source'  =>  $from_en . ' <' . $from[0]->getEmail() . '>',
+            'Source'  =>  $from_en . ' <' . $from->getEmail() . '>',
             'Message' => [
                 'Subject' => ['Data' => $message->getSubject()],
             ]
@@ -114,7 +118,7 @@ class SesService extends AbstractMailService
         foreach ($message->getTo() as $address) {
             $to[] = $address->getEmail();
         }
-        $from = $message->getFrom();
+        $from = $this->extractFrom($message);
         $htmlContent = $this->extractHtml($message);
 
         $mySeparator = md5(time());
@@ -126,7 +130,7 @@ class SesService extends AbstractMailService
 
         $myMessage .= "To: ". $to[0] ."\n";
 
-        $myMessage .= "From:". $from[0]->getName() . ' <' . $from[0]->getEmail() . '>' ."\n";
+        $myMessage .= "From:". $from->getName() . ' <' . $from->getEmail() . '>' ."\n";
         $myMessage .= "Subject:".$message->getSubject()."\n";
 
         $myMessage .= "Content-Type: multipart/mixed; boundary=\"".$mySeparator_multipart."\"\n";
@@ -151,7 +155,7 @@ class SesService extends AbstractMailService
         }
         $myMessage .= "--" . $mySeparator_multipart . "--";
         $myArraySES = [
-            'Source'       => $from[0]->getEmail(),
+            'Source'       => $from->getEmail(),
             'Destinations' => $to,
             'RawMessage'   => [
                 'Data' => $myMessage
@@ -159,6 +163,18 @@ class SesService extends AbstractMailService
         ];
 
         return $SesClient->sendRawEmail($myArraySES);
+    }
+
+    protected function extractFrom($message) {
+
+        $from = $message->getFrom();
+        if ($from instanceof AddressList) {
+            $from->rewind();
+            $from = $from->current();
+        } else if (is_array($from) && count($from)) {
+            return current($from);
+        }
+        return false;
     }
 
     /**

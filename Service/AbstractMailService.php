@@ -75,6 +75,9 @@ abstract class AbstractMailService implements MailServiceInterface
         $body = $message->getBody();
         $filter      = ['text/plain', 'text/html'];
         $attachments = [];
+        if (!method_exists($body, 'getParts')) {
+            return $attachments;
+        }
         foreach ($body->getParts() as $part) {
             if (!in_array($part->getType(), $filter)) {
                 $attachments[] = $part;

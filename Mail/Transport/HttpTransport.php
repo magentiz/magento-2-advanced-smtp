@@ -7,6 +7,8 @@ use Laminas\Mail\Message;
 
 class HttpTransport implements TransportInterface
 {
+    protected $service;
+
     public function __construct(\Magentiz\AWSSes\Mail\SesService $service)
     {
         $this->service = $service;
@@ -22,10 +24,13 @@ class HttpTransport implements TransportInterface
 
     public function hasAttachment($message){
         $body = $message->getBody();
+        if (!method_exists($body, 'getParts')) {
+            return false;
+        }
         $filter      = ['text/plain', 'text/html'];
         foreach ($body->getParts() as $part) {
             if (!in_array($part->getType(), $filter)) {
-                return true;       
+                return true;
             }
         }
         return false;
