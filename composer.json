@@ -3,7 +3,7 @@
     "description": "Magentiz_AWSSes Extension, awsses for magento 2",
     "require": {
         "php": "~5.6.5 || >=7.0",
-        "mageplaza/module-smtp": "^1.2"
+        "mageplaza/module-smtp": "@stable"
     },
     "type": "magento2-module",
     "version": "1.0.0",
