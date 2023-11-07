@@ -1,6 +1,6 @@
 # Magentiz AWSSes by Open Techiz
 Magentiz_AWSSes Extension, awsses for magento 2
-> Magentiz AWSSes is built depending on module [Magento 2 SMTP](https://github.com/mageplaza/magento-2-smtp) and has additional integration with [AWS Ses](https://aws.amazon.com/ses/), please install module [Magento 2 SMTP](https://github.com/mageplaza/magento-2-smtp).
+> Magentiz AWSSes is built depending on module [Magento 2 SMTP](https://github.com/mageplaza/magento-2-smtp) and has additional integration with [AWS Ses](https://aws.amazon.com/ses/), [Magento 2 SMTP](https://github.com/mageplaza/magento-2-smtp) will be automatically installed when you use Composer. If you're using an archive, please install module [Magento 2 SMTP](https://github.com/mageplaza/magento-2-smtp) for the extension to work properly.
 
 ## Requirements
   * Magento Community Edition 2.3.x-2.4.x or Magento Enterprise Edition 2.3.x-2.4.x
