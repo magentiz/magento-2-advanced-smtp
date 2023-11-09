@@ -6,4 +6,4 @@
 
 use Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Magentiz_AWSSes', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Magentiz_AdvancedSmtp', __DIR__);

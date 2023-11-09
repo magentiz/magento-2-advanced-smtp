@@ -4,9 +4,9 @@
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  */
 
-namespace Magentiz\AWSSes\Service;
+namespace Magentiz\AdvancedSmtp\Service;
 
-use Magentiz\AWSSes\Api\MailServiceInterface;
+use Magentiz\AdvancedSmtp\Api\MailServiceInterface;
 use Laminas\Http\Client as HttpClient;
 use Laminas\Mail\Message;
 use Laminas\Mime\Message as MimeMessage;

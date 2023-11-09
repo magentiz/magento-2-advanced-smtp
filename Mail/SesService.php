@@ -4,10 +4,10 @@
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  */
 
-namespace Magentiz\AWSSes\Mail;
+namespace Magentiz\AdvancedSmtp\Mail;
 
-use Magentiz\AWSSes\Model\Config\Configuration;
-use Magentiz\AWSSes\Service\AbstractMailService;
+use Magentiz\AdvancedSmtp\Model\Config\Configuration;
+use Magentiz\AdvancedSmtp\Service\AbstractMailService;
 use Aws\Ses\Exception\SesException;
 use Aws\Ses\SesClient;
 use Laminas\Mail\AddressList;

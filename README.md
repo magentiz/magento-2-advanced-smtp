@@ -1,6 +1,6 @@
-# Magentiz AWSSes by Open Techiz
-Magentiz_AWSSes Extension, awsses for magento 2
-> Magentiz AWSSes is built depending on module [Magento 2 SMTP](https://github.com/mageplaza/magento-2-smtp) and has additional integration with [AWS Ses](https://aws.amazon.com/ses/), [Magento 2 SMTP](https://github.com/mageplaza/magento-2-smtp) will be automatically installed when you use Composer. If you're using an archive, please install module [Magento 2 SMTP](https://github.com/mageplaza/magento-2-smtp) for the extension to work properly.
+# Magentiz AdvancedSmtp by Open Techiz
+Magentiz_AdvancedSmtp Extension, AdvancedSmtp for magento 2
+> Magentiz AdvancedSmtp is built depending on module [Magento 2 SMTP](https://github.com/mageplaza/magento-2-smtp) and has additional integration with [AWS Ses](https://aws.amazon.com/ses/), [Magento 2 SMTP](https://github.com/mageplaza/magento-2-smtp) will be automatically installed when you use Composer. If you're using an archive, please install module [Magento 2 SMTP](https://github.com/mageplaza/magento-2-smtp) for the extension to work properly.
 
 ## Requirements
   * Magento Community Edition 2.3.x-2.4.x or Magento Enterprise Edition 2.3.x-2.4.x
@@ -9,17 +9,17 @@ Magentiz_AWSSes Extension, awsses for magento 2
 ## Installation Method 1 - Installing via composer
   * Open command line
   * Using command "cd" navigate to your magento2 root directory
-  * Run command: composer require magentiz/awsses
+  * Run command: composer require magentiz/advanced-smtp
 
 ## Installation Method 2 - Installing using archive
   * Download [ZIP Archive](link)
   * Extract files
-  * In your Magento 2 root directory create folder app/code/Magentiz/AWSSes
+  * In your Magento 2 root directory create folder app/code/Magentiz/AdvancedSmtp
   * Copy files and folders from archive to that folder
   * In command line, using "cd", navigate to your Magento 2 root directory
   * Run commands:
 ```
-php bin/magento module:enable Magentiz_AWSSes
+php bin/magento module:enable Magentiz_AdvancedSmtp
 php bin/magento setup:upgrade
 php bin/magento setup:di:compile
 php bin/magento setup:static-content:deploy

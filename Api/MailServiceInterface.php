@@ -4,7 +4,7 @@
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  */
 
-namespace Magentiz\AWSSes\Api;
+namespace Magentiz\AdvancedSmtp\Api;
 
 use Laminas\Mail\Message;
 

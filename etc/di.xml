@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<type name="Magento\Framework\Mail\TransportInterface">
+        <plugin name="mageplaza_mail_transport" disabled="true"/>
+        <plugin name="mageplaza_extend_mail_transport" type="Mageplaza\Smtp\Mail\Transport" sortOrder="0" disabled="false"/>
+    </type>
+    <type name="Magento\Framework\Mail\Template\TransportBuilder">
+        <plugin name="mageplaza_extend_transport_builder_set_template" type="Magentiz\AdvancedSmtp\Plugin\TransportBuilder" />
+    </type>
+    <preference for="Mageplaza\Smtp\Mail\Transport" type="Magentiz\AdvancedSmtp\Mail\Transport" />
+    
+    <type name="Mageplaza\Smtp\Model\Log">
+        <plugin name="save_attachment" type="Magentiz\AdvancedSmtp\Plugin\Email\SaveAttachment" />
+    </type>
+</config>

@@ -1,0 +1,8 @@
+{
+    "mageplaza_smtp_log": {
+        "column": {
+            "attachment": true,
+            "is_save_attachment": true
+        }
+    }
+}

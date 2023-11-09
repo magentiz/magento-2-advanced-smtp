@@ -4,7 +4,7 @@
  * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
  */
 
-namespace Magentiz\AWSSes\Mail\Transport;
+namespace Magentiz\AdvancedSmtp\Mail\Transport;
 
 use Laminas\Mail\Transport\TransportInterface;
 use Laminas\Mail\Message;
@@ -13,7 +13,7 @@ class HttpTransport implements TransportInterface
 {
     protected $service;
 
-    public function __construct(\Magentiz\AWSSes\Mail\SesService $service)
+    public function __construct(\Magentiz\AdvancedSmtp\Mail\SesService $service)
     {
         $this->service = $service;
     }
