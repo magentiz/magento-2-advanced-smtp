@@ -93,7 +93,7 @@ class Transport extends \Mageplaza\Smtp\Mail\Transport
             if ($messageTmp && is_object($messageTmp)) {
                 $body = $messageTmp->getBody();
                 if (is_object($body) && $body->isMultiPart()) {
-                    $message->setBody($body->getPartContent("0"));
+                    $message->setBody($body->getPartContent('0'));
                 }
             }
         }

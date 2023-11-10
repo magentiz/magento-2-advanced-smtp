@@ -25,6 +25,17 @@ php bin/magento setup:di:compile
 php bin/magento setup:static-content:deploy
 ```
 
+## User guide
+
+### 1. Configuration
+
+Log into the Magento administration panel, go to ```Store > Configuration > Mageplaza Extension > SMTP > AWS SES config```.
+Choose Yes to enable AWS SES. Enter AWS Ses api and secret key.
+
+### 2. Email logs
+This can be accessed at ```Store > SMTP > Email Logs```. From here you can see the emails sent from the server to customers.
+
+
 ## Support
 If you have any issues, please [contact us](mailto:support@opentechiz.com)
 
