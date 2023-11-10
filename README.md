@@ -1,6 +1,6 @@
 # Magentiz AdvancedSmtp by Open Techiz
 Magentiz_AdvancedSmtp Extension, AdvancedSmtp for magento 2
-> Magentiz AdvancedSmtp is built depending on module [Magento 2 SMTP](https://github.com/mageplaza/magento-2-smtp) and has additional integration with [AWS Ses](https://aws.amazon.com/ses/), [Magento 2 SMTP](https://github.com/mageplaza/magento-2-smtp) will be automatically installed when you use Composer. If you're using an archive, please install module [Magento 2 SMTP](https://github.com/mageplaza/magento-2-smtp) for the extension to work properly.
+> Magentiz AdvancedSmtp is built depending on module [Magento 2 SMTP](https://github.com/mageplaza/magento-2-smtp) and has additional integration with [AWS Ses](https://aws.amazon.com/ses/), [Magento 2 SMTP](https://github.com/mageplaza/magento-2-smtp) will be automatically installed when you use Composer. If you're installing using an archive, please install module [Magento 2 SMTP](https://github.com/mageplaza/magento-2-smtp) for the extension to work properly.
 
 ## Requirements
   * Magento Community Edition 2.3.x-2.4.x or Magento Enterprise Edition 2.3.x-2.4.x

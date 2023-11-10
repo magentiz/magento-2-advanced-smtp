@@ -1,4 +1,9 @@
 <?php
+/**
+ * Copyright © Open Techiz. All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ */
+
 namespace Magentiz\AdvancedSmtp\Model\Email;
 
 use Psr\Log\LoggerInterface;
@@ -11,24 +16,37 @@ use Magento\Framework\UrlInterface;
 class AttachmentMedia
 {
 	const FOLDER_EMAIL_LOG_ATTACHMENT = 'attachment_emailog';
-
-	protected $_dir;
-
-	protected $_filesystem;
-
-	protected $_logger;
-
-	/**
+	const UNSECURE_BASE_URL = 'web/unsecure/base_url';
+    /**
      * @var ScopeConfigInterface
      */
     protected $_scopeConfig;
-
     /**
      * @var StoreManagerInterface
      */
     protected $_storeManager;
+    /**
+     * @var DirectoryList
+     */
+    protected $_dir;
+    /**
+     * @var Filesystem
+     */
+    protected $_filesystem;
+    /**
+     * @var LoggerInterface
+     */
+    protected $_logger;
 
-	public function __construct(
+    /**
+     * AttachmentMedia constructor.
+     * @param ScopeConfigInterface $scopeConfig
+     * @param StoreManagerInterface $storeManager
+     * @param DirectoryList $dir
+     * @param Filesystem $filesystem
+     * @param LoggerInterface $logger
+     */
+    public function __construct(
 		ScopeConfigInterface $scopeConfig,
 		StoreManagerInterface $storeManager,
 		DirectoryList $dir,
@@ -36,35 +54,40 @@ class AttachmentMedia
 		LoggerInterface $logger
 	)
 	{
+        $this->_scopeConfig = $scopeConfig;
+        $this->_storeManager = $storeManager;
 		$this->_dir = $dir;
 		$this->_filesystem = $filesystem;
 		$this->_logger = $logger;
-		$this->_storeManager = $storeManager;
-		$this->_scopeConfig = $scopeConfig;
 	}
 
-	public function save($logId = 0, \Laminas\Mime\Part $attachment)
+    /**
+     * @param int $logId
+     * @param \Laminas\Mime\Part $attachment
+     */
+    public function save(\Laminas\Mime\Part $attachment, $logId = 0)
 	{
 		$filename = $attachment->getFileName();
-		$type = $attachment->getType();
 		$content = $attachment->getRawContent();
-
-		if(!$filename || !$content || !$logId)
-		{
+		if (!$filename || !$content || !$logId) {
 			return;
 		}
 
 		$path = self::FOLDER_EMAIL_LOG_ATTACHMENT.'/' . $logId . '/' . $filename;
-		try{
+		try {
 			$media = $this->_filesystem->getDirectoryWrite($this->_dir::MEDIA);
             $media->writeFile($path,$content);
-		}catch(\Throwable $e)
-		{
+		} catch (\Throwable $e) {
             $this->_logger->critical($e->getMessage());
 		}
 	}
 
-	public function getMediaUrl($logId = 0, $useMedia = true)
+    /**
+     * @param int $logId
+     * @param bool $useMedia
+     * @return string
+     */
+    public function getMediaUrl($useMedia = true, $logId = 0)
 	{
 		$mediaUrl = ($useMedia)
         ? $this->_storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA)
@@ -78,7 +101,7 @@ class AttachmentMedia
      */
     private function getCurrentDomain()
     {
-        $url = $this->_scopeConfig->getValue('web/unsecure/base_url', ScopeConfigInterface::SCOPE_TYPE_DEFAULT);
+        $url = $this->_scopeConfig->getValue(self::UNSECURE_BASE_URL, ScopeConfigInterface::SCOPE_TYPE_DEFAULT);
         if (!$url) {
             $currentStore = $this->_storeManager->getStore();
             $url = $currentStore->getCurrentUrl();

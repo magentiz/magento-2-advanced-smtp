@@ -1,4 +1,8 @@
 <?php
+/**
+ * Copyright © Open Techiz. All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ */
 
 namespace Magentiz\AdvancedSmtp\Mail;
 
@@ -40,7 +44,7 @@ class Transport extends \Mageplaza\Smtp\Mail\Transport
     /**
      * @var \Magentiz\AdvancedSmtp\Model\Email\AttachmentManagement
      */
-    protected $_attachmentManagement;
+    protected $attachmentManagement;
 
     protected $_message = null;
 
@@ -74,10 +78,15 @@ class Transport extends \Mageplaza\Smtp\Mail\Transport
         $this->messageManager = $messageManager;
         $this->configuration = $configuration;
         $this->appState = $appState;
-        $this->_attachmentManagement = $attachmentManagement;
+        $this->attachmentManagement = $attachmentManagement;
         parent::__construct($resourceMail, $logFactory, $registry, $helper, $logger);
     }
 
+    /**
+     * prepareMessageLog()
+     * @param $subject
+     * @param $message
+     */
     protected function prepareMessageLog($subject, $message) {
         if ($this->helper->versionCompare('2.2.8')) {
             $messageTmp = $this->getMessage($subject);
@@ -91,27 +100,30 @@ class Transport extends \Mageplaza\Smtp\Mail\Transport
         return $message;
     }
 
+    /**
+     * @param TransportInterface $subject
+     * @param \Closure $proceed
+     */
     public function aroundSendMessage(TransportInterface $subject, \Closure $proceed)
     {
         $this->_storeId = $this->registry->registry('mp_smtp_store_id');
         $message = $this->getMessage($subject);
         $this->_message = $message;
-
-        if($message && $this->configuration->isEnableAWSSes()){
+        if ($message && $this->configuration->isEnableAWSSes()) {
             if (!$this->validateBlacklist($message)) {
                 $message   = $this->resourceMail->processMessage($message, $this->_storeId);
                 try {
                     if (!$this->resourceMail->isDeveloperMode($this->_storeId)) {
-                        if($this->awsSes->hasAttachment($message)){
+                        if ($this->awsSes->hasAttachment($message)) {
                             $this->awsSes->sendRaw($message);
-                        }else{
+                        } else {
                             $this->awsSes->send($message);
                         }
                     }
                     if ($this->helper->versionCompare('2.2.8')) {
                         $message = Message::fromString($message->getRawMessage())->setEncoding('utf-8');
                     }
-                    $message   = $this->resourceMail->processMessage($message, $this->_storeId);
+                    $message = $this->resourceMail->processMessage($message, $this->_storeId);
                     $message = $this->prepareMessageLog($subject, $message);
                     $this->emailLog($message);
                 } catch (\Throwable $e) {
@@ -139,7 +151,7 @@ class Transport extends \Mageplaza\Smtp\Mail\Transport
                 try {
                     if (!$this->resourceMail->isDeveloperMode($this->_storeId)) {
                         if ($this->helper->versionCompare('2.3.3')) {
-                            $message->getHeaders()->removeHeader("Content-Disposition");
+                            $message->getHeaders()->removeHeader('Content-Disposition');
                         }
                         $transport->send($message);
                     }
@@ -158,12 +170,16 @@ class Transport extends \Mageplaza\Smtp\Mail\Transport
         }
     }
 
+    /**
+     * @param $message
+     * @param $error
+     */
     protected function saveLogError($message, $error)
     {
         if ($this->appState === \Magento\Framework\App\Area::AREA_ADMINHTML) {
             $this->messageManager->addErrorMessage($error);
         } else {
-            $this->messageManager->addErrorMessage(__("Can't send email"));
+            $this->messageManager->addErrorMessage(__('Can\'t send email'));
         }
         if ($this->resourceMail->isEnableEmailLog($this->_storeId)) {
             $log = $this->logFactory->create();
@@ -182,6 +198,10 @@ class Transport extends \Mageplaza\Smtp\Mail\Transport
         }
     }
 
+    /**
+     * @param $message
+     * @param bool $status
+     */
     protected function emailLog($message, $status = true)
     {
         if ($this->resourceMail->isEnableEmailLog($this->_storeId)) {
@@ -203,12 +223,15 @@ class Transport extends \Mageplaza\Smtp\Mail\Transport
         }
     }
 
+    /**
+     * @param $message
+     * @param $log
+     */
     protected function addMessageAttachmentToEmailLog($message, $log)
     {
         if(!$message || !is_object($message) || !$this->awsSes->hasAttachment($message)){
             return;
         }
-
-        $this->_attachmentManagement->addLog($message, $log);
+        $this->attachmentManagement->addLog($message, $log);
     }
 }

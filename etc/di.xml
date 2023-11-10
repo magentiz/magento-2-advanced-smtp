@@ -1,4 +1,10 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Open Techiz. All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ */
+-->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 	<type name="Magento\Framework\Mail\TransportInterface">
         <plugin name="mageplaza_mail_transport" disabled="true"/>
@@ -8,7 +14,6 @@
         <plugin name="mageplaza_extend_transport_builder_set_template" type="Magentiz\AdvancedSmtp\Plugin\TransportBuilder" />
     </type>
     <preference for="Mageplaza\Smtp\Mail\Transport" type="Magentiz\AdvancedSmtp\Mail\Transport" />
-    
     <type name="Mageplaza\Smtp\Model\Log">
         <plugin name="save_attachment" type="Magentiz\AdvancedSmtp\Plugin\Email\SaveAttachment" />
     </type>
