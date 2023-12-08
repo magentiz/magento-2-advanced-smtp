@@ -190,7 +190,6 @@ class Transport extends \Mageplaza\Smtp\Mail\Transport
                 $this->addMessageAttachmentToEmailLog($this->_message, $log);
                 $log->saveLog($message, false);
             } catch (\Throwable $e) {
-                exit($e->getMessage());
                 $this->logger->critical($e->getMessage());
             } catch (\Exception $e) {
                 $this->logger->critical($e->getMessage());

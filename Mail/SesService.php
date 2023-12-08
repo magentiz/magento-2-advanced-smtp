@@ -129,8 +129,8 @@ class SesService extends AbstractMailService
         $from = $this->extractFrom($message);
         $htmlContent = $this->extractHtml($message);
 
-        $mySeparator = md5(time());
-        $mySeparator_multipart = md5($message->getSubject() . time());
+        $mySeparator = hash('sha256', time());
+        $mySeparator_multipart = hash('sha256', $message->getSubject() . time());
 
         $myMessage = "";
 
