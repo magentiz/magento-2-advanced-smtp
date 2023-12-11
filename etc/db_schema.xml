@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Open Techiz. All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="mageplaza_smtp_log" resource="default" engine="innodb" comment="mageplaza_smtp_log">
+        <column xsi:type="smallint" name="is_save_attachment" padding="10" unsigned="true" 
+                nullable="false" default="0" identity="false" comment="Is Save Attachment"/>
+        <column xsi:type="text" name="attachment" nullable="true" comment="Attachment"/>
+        <column xsi:type="text" name="error_message" nullable="true" comment="Error Message"/>
+        <column xsi:type="text" name="email_template" nullable="true" comment="Email Template"/>
+    </table>
+</schema>
