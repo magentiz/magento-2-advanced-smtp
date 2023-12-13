@@ -5,6 +5,7 @@ Magentiz_AdvancedSmtp Extension, AdvancedSmtp for magento 2
 ## Requirements
   * Magento Community Edition 2.3.x-2.4.x or Magento Enterprise Edition 2.3.x-2.4.x
   * Exec function needs to be enabled in PHP settings.
+  * Extension [Magento 2 SMTP](https://github.com/mageplaza/magento-2-smtp)
 
 ## Installation Method 1 - Installing via composer
   * Open command line
