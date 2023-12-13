@@ -13,9 +13,9 @@
     ],
     "authors": [
         {
-          "name": "Open Techiz",
-          "email": "support@opentechiz.com",
-          "homepage": "https://www.opentechiz.com",
+          "name": "Magentiz",
+          "email": "info@magentiz.com",
+          "homepage": "https://magentiz.com",
           "role": "Technical Support"
         }
     ],
@@ -27,8 +27,7 @@
       "advanced-smt",
       "awsses",
       "magentiz",
-      "magentiz_advancedsmtp",
-      "opentechiz"
+      "magentiz_advancedsmtp"
     ],
     "autoload": {
         "files": [ "registration.php" ],
