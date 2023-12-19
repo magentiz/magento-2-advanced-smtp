@@ -10,7 +10,7 @@ Magentiz_AdvancedSmtp Extension, AdvancedSmtp for magento 2
 ## Installation Method 1 - Installing via composer
   * Open command line
   * Using command "cd" navigate to your magento2 root directory
-  * Run command: composer require magentiz/advanced-smtp
+  * Run command: composer require magentiz/module-advanced-smtp
 
 ## Installation Method 2 - Installing using archive
   * Download [ZIP Archive](https://github.com/magentiz/magento-2-advanced-smtp/releases)
